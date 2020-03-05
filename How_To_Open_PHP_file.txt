@@ -1,7 +1,11 @@
 To open a php file in chrome, I 
-downloaded MAMP and from the prefrences, go to
-port, and in there set Apache to 8888.
-Also, make sure in Web Server you select Apache.
+downloaded MAMP and then go to prefrences and do the following: 
+1) Go to port, and in there set Apache to 8888.
+2) Also, make sure in Web Server you select Apache.
+3) Make sure that when you are in Web Server, the 
+  Document Root is the same root as the folder 
+  containing your php file.
+
 
 After that, you can just open a chrome tab, type
 "localhost:8888" (without quotations) and you
