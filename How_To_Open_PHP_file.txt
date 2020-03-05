@@ -1,0 +1,8 @@
+To open a php file in chrome, I 
+downloaded MAMP and from the prefrences, go to
+port, and in there set Apache to 8888.
+Also, make sure in Web Server you select Apache.
+
+After that, you can just open a chrome tab, type
+"localhost:8888" (without quotations) and you
+should see the upload stuff... :)
