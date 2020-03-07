@@ -26,10 +26,10 @@
             button2(); 
         } 
         else if(array_key_exists('button3', $_POST)) {
-            button3();
+            button3($_POST["filename"]);
         }
         else if(array_key_exists('button4', $_POST)) {
-            button4();
+            button4($_POST["filename"]);
         }
         function button1() { 
             //echo "This is Button1 that is selected"; 
@@ -58,16 +58,28 @@
                                        class="button" value= "Accept"/>
                                 <input type="submit" name="button4" 
                                        class="button" value= "Reject"/>
+				<input type="hidden" name="filename" value="<?php echo $files[$a] ?>">
                                 </form> 
                         </p>
                         <?php
                     }   
 			$db->close();
         } 
-        function button3(){
+        function button3($filename){
+	    $db = new SQLite3('submitted_works.db');
+	    $q = $db->prepare("REPLACE INTO submissions (name, status) VALUES(?,'Accepted')");
+	    $q->bindValue(1, $filename);
+	    $q->execute();
+	    $db->close();
+	    
             echo '<span style="color:#12EB2B;text-align:center;">You have accepted the submission!</span>';
         }
-        function button4(){
+        function button4($filename){
+	    $db = new SQLite3('submitted_works.db');
+	    $q = $db->prepare("REPLACE INTO submissions (name, status) VALUES(?,'Rejected')");
+	    $q->bindValue(1, $filename);
+	    $q->execute();
+	    $db->close();
             echo '<span style="color:#F10719;text-align:center;">You have rejected the submission.</span>';
         }
         
