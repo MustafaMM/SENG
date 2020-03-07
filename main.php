@@ -1,8 +1,10 @@
-<!DOCTYPE html> 
+<!DOCTYPE html> 	<!--  Instruction to the web browser about what version of HTML the page is written in. --> 
 <html> 
       
-<head> 
-    <title> 
+<head> 		
+	   <!-- a container for metadata (data about data) about the document. -->
+    <title> 		
+	    <!-- Defines the title. -->
         How to call PHP function 
         on the click of a Button ? 
     </title> 
