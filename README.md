@@ -1,5 +1,6 @@
-# SENG
+# Paper Submission System
 SENG_300 Winter 2020
 
-Project: Paper Submission System
+Project
+
 Iteration 1
