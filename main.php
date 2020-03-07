@@ -1,5 +1,5 @@
 <!DOCTYPE html> 	<!--  Instruction to the web browser about what version of HTML the page is written in. --> 
-<html> 
+<html> 			
       
 <head> 		
 	   <!-- a container for metadata (data about data) about the document. -->
@@ -21,6 +21,7 @@
     </h4> 
       
     <?php
+	#Start PHP code interpretation.
         if(array_key_exists('button1', $_POST)) { 
             button1(); 
         } 
@@ -84,7 +85,7 @@
 	    $db->close();
             echo '<span style="color:#F10719;text-align:center;">You have rejected the submission.</span>';
         }
-        
+    #End PHP code interpretation.    
     ?> 
   
     <form method="post"> 
