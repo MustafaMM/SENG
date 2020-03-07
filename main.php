@@ -89,12 +89,15 @@
     ?> 
   
     <form method="post"> 
+	<!-- defines a form that is used to collect user input, and defines a button for submitting the form data to a form-handler -->
+		
         <input type="submit" name="button1"
                 class="button" value="Researcher" /> 
           
         <input type="submit" name="button2"
                 class="button" value="Reviewer" /> 
     </form> 
+	<!-- End html doc. -->
 </head> 
   
 </html> 
