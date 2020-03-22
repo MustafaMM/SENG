@@ -1,5 +1,5 @@
 <!-- This file implements the database functionality for the paper submission system.
-Last Modified: March 15 2020
+Last Modified: March 22 2020
 
 Database Tables:
 users (usrId INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT, role TEXT, email TEXT)
@@ -43,7 +43,7 @@ function addUser($username, $password, $role, $email) {
 	$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 	if(! usernameExists($username)) {
 		$db = new SQLite3("submission_system.db");
-		$q = $db->prepare("INSERT INTO TABLE users (username, password, role, email) VALUES(?,?,?,?)");
+		$q = $db->prepare("INSERT INTO users (username, password, role, email) VALUES(?,?,?,?)");
 		$q->bindValue(1, $username);
 		$q->bindValue(1, $hashed_password);
 		$q->bindValue(1, $role);
@@ -118,12 +118,12 @@ function newSubmission($filename, $resUsrId) {
 	}
 	$deadline = date("Y-") .strval($month) ."-" .strval($day);
 	$db = new SQLite3("submission_system.db");
-	$q = $db->prepare("INSERT INTO TABLE submissions (file, status, resUsrId, subTerm, subDeadline, subDate) VALUES (?, 'Not yet reviewed', ?, ?, ?, ?)");
-	$q->bindValue(1, $filename);
-	$q->bindValue(2, $resUsrId);
-	$q->bindValue(3, $deadline);
-	$q->bindValue(4, $deadline);
-	$q->bindValue(5, $subDate);
+	$q = $db->prepare("INSERT INTO submissions (file, status, resUsrId, subTerm, subDeadline, subDate) VALUES(?, 'Not yet reviewed', ?, ?, ?, ?)");
+	$q->bindValue(1, $filename, SQLITE3_TEXT);
+	$q->bindValue(2, $resUsrId, SQLITE3_INTEGER);
+	$q->bindValue(3, $deadline, SQLITE3_TEXT);
+	$q->bindValue(4, $deadline, SQLITE3_TEXT);
+	$q->bindValue(5, $subDate, SQLITE3_TEXT);
 	$q->execute();
 	$db->close();
 }
@@ -140,7 +140,12 @@ function getUserSubmissions($resUsrId) {
 	$q = $db->prepare("SELECT * FROM submissions WHERE resUsrId=?");
 	$q->bindValue(1, $resUsrId);
 	$result = $q->execute();
-	$rows = $result->fetchAll();
+	$rows = [];
+	$row = $result->fetchArray();
+	while($row) {
+		array_push($rows, $row);
+		$row = $result->fetchArray();
+	}
 	$db->close();
 	return $rows;
 }
@@ -202,7 +207,7 @@ function updateSubmissionFile($subId, $filename) {
  */
 function addNomination($subId, $revUsrId) {
 	$db = new SQLite3("submission_system.db");
-	$q = $db->prepare("INSERT INTO TABLE nominated (subId, revUsrId) VALUES(?, ?)");
+	$q = $db->prepare("INSERT INTO nominated (subId, revUsrId) VALUES(?, ?)");
 	$q->bindValue(1, $subId);
 	$q->bindValue(2, $revUsrId);
 	$q->execute();
@@ -221,7 +226,12 @@ function getSubmissionNominations($subId) {
 	$q = $db->prepare("SELECT * FROM nominated WHERE subId=?");
 	$q->bindValue(1, $subId);
 	$result = $q->execute();
-	$rows = $result->fetchAll();
+	$rows = [];
+	$row = $result->fetchArray();
+	while($row) {
+		array_push($rows, $row);
+		$row = $result->fetchArray();
+	}
 	$db->close();
 	return $rows;
 }
@@ -238,7 +248,12 @@ function getReviewerNominations($revUsrId) {
 	$q = $db->prepare("SELECT * FROM nominated WHERE revUsrId=?");
 	$q->bindValue(1, $revUsrId);
 	$result = $q->execute();
-	$rows = $result->fetchAll();
+	$rows = [];
+	$row = $result->fetchArray();
+	while($row) {
+		array_push($rows, $row);
+		$row = $result->fetchArray();
+	}
 	$db->close();
 	return $rows;
 }
@@ -251,7 +266,7 @@ function getReviewerNominations($revUsrId) {
  */
 function addRequest($subId, $revUsrId) {
 	$db = new SQLite3("submission_system.db");
-	$q = $db->prepare("INSERT INTO TABLE requested (subId, revUsrId) VALUES(?, ?)");
+	$q = $db->prepare("INSERT INTO requested (subId, revUsrId) VALUES(?, ?)");
 	$q->bindValue(1, $subId);
 	$q->bindValue(2, $revUsrId);
 	$q->execute();
@@ -270,7 +285,12 @@ function getSubmissionRequests($subId) {
 	$q = $db->prepare("SELECT * FROM requested WHERE subId=?");
 	$q->bindValue(1, $subId);
 	$result = $q->execute();
-	$rows = $result->fetchAll();
+	$rows = [];
+	$row = $result->fetchArray();
+	while($row) {
+		array_push($rows, $row);
+		$row = $result->fetchArray();
+	}
 	$db->close();
 	return $rows;
 }
@@ -287,7 +307,12 @@ function getReviewerRequests($revUsrId) {
 	$q = $db->prepare("SELECT * FROM requested WHERE revUsrId=?");
 	$q->bindValue(1, $revUsrId);
 	$result = $q->execute();
-	$rows = $result->fetchAll();
+	$$rows = [];
+	$row = $result->fetchArray();
+	while($row) {
+		array_push($rows, $row);
+		$row = $result->fetchArray();
+	}
 	$db->close();
 	return $rows;
 }
@@ -300,7 +325,7 @@ function getReviewerRequests($revUsrId) {
  */
 function addReview($subId, $revUsrId) {
 	$db = new SQLite3("submission_system.db");
-	$q->prepare("INSERT INTO TABLE reviews (subId, revUsrId, status, viewDate, feedback) VALUES(?, ?, 'Not yet reviewed', 'none', '')");
+	$q = $db->prepare("INSERT INTO reviews (subId, revUsrId, status, viewDate, feedback) VALUES(?, ?, 'Not yet reviewed', 'none', '')");
 	$q->bindValue(1, $subId);
 	$q->bindValue(2, $revUsrId);
 	$q->execute();
@@ -316,7 +341,7 @@ function addReview($subId, $revUsrId) {
  */
 function updateReviewStatus($reviewId, $status, $feedback) {
 	$db = new SQLite3("submission_system.db");
-	$q->prepare("UPDATE reviews SET status=?, feedback=? WHERE reviewId=?");
+	$q = $db->prepare("UPDATE reviews SET status=?, feedback=? WHERE reviewId=?");
 	$q->bindValue(1, $status);
 	$q->bindValue(2, $feedback);
 	$q->bindValue(3, $reviewId);
@@ -331,7 +356,7 @@ function updateReviewStatus($reviewId, $status, $feedback) {
  */
 function markAsViewed($reviewId) {
 	$db = new SQLite3("submission_system.db");
-	$q->prepare("UPDATE reviews SET viewDate=? WHERE reviewId=?");
+	$q = $db->prepare("UPDATE reviews SET viewDate=? WHERE reviewId=?");
 	$q->bindValue(1, date("Y-n-j"));
 	$q->bindValue(2, $reviewId);
 	$q->execute();
@@ -350,7 +375,12 @@ function getSubmissionReviews($subId) {
 	$q = $db->prepare("SELECT * FROM reviews WHERE subId=?");
 	$q->bindValue(1, $subId);
 	$result = $q->execute();
-	$rows = $result->fetchAll();
+	$rows = [];
+	$row = $result->fetchArray();
+	while($row) {
+		array_push($rows, $row);
+		$row = $result->fetchArray();
+	}
 	$db->close();
 	return $rows;
 }
@@ -367,7 +397,12 @@ function getReviewerReviews($revUsrId) {
 	$q = $db->prepare("SELECT * FROM reviews WHERE revUsrId=?");
 	$q->bindValue(1, $revUsrId);
 	$result = $q->execute();
-	$rows = $result->fetchAll();
+	$rows = [];
+	$row = $result->fetchArray();
+	while($row) {
+		array_push($rows, $row);
+		$row = $result->fetchArray();
+	}
 	$db->close();
 	return $rows;
 }
