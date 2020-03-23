@@ -1,5 +1,5 @@
 <!-- This file implements the database functionality for the paper submission system.
-Last Modified: March 22 2020
+Last Modified: March 23 2020
 
 Database Tables:
 users (usrId INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT, role TEXT, email TEXT)
@@ -81,6 +81,29 @@ function verifyLogin($username, $password) {
 }
 
 /**
+ * Checks if an email address and password exist
+ *
+ * @param email The email address to check
+ * @param password The password to check
+ *
+ * @return true if the given email address and password are correct, and false otherwise
+ */
+function verifyEmailLogin($email, $password) {
+	$db = new SQLite3("submission_system.db");
+	$q = $db->prepare("SELECT * FROM users WHERE email=?");
+	$q->bindValue(1, $email);
+	$result = $q->execute();
+	$row = $result->fetchArray();
+	$db->close();
+	if(count($row) > 0 && password_verify($password, $row[2])) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+/**
  * Returns the info for a given user
  *
  * @param username The username to retrieve
@@ -91,6 +114,23 @@ function getUserInfo($username) {
 	$db = new SQLite3("submission_system.db");
 	$q = $db->prepare("SELECT * FROM users WHERE username=?");
 	$q->bindValue(1, $username);
+	$result = $q->execute();
+	$row = $result->fetchArray();
+	$db->close();
+	return $row;
+}
+
+/**
+ * Returns the info for a given user
+ *
+ * @param email The email address to retrieve
+ *
+ * @return An array of the form [usrId, username, password, role, email]
+ */
+function getEmailInfo($email) {
+	$db = new SQLite3("submission_system.db");
+	$q = $db->prepare("SELECT * FROM users WHERE email=?");
+	$q->bindValue(1, $email);
 	$result = $q->execute();
 	$row = $result->fetchArray();
 	$db->close();
