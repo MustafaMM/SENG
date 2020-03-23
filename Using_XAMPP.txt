@@ -13,3 +13,6 @@ New folder --> (C:\xampp\htdocs\test1)
 5) Fire up a web browser and type in 'localhost/test1/main.php'.
 
 6) You should now be able to view our website in all its magnificent glory. 
+
+Error troubleshooting:
+https://www.quora.com/MySQL-shutdown-unexpectedly-in-XAMPP-How-can-I-fix-it
