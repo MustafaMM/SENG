@@ -16,3 +16,4 @@ New folder --> (C:\xampp\htdocs\test1)
 
 Error troubleshooting:
 https://www.quora.com/MySQL-shutdown-unexpectedly-in-XAMPP-How-can-I-fix-it
+https://stackoverflow.com/questions/7180893/mysql-said-cannot-connect-invalid-settings-xampp
