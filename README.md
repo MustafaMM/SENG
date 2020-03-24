@@ -11,4 +11,4 @@ Once you have XAMPP, open XAMPP control panel, start the Apache and MySQL server
 
 Go to C:\xampp\htdocs, create a folder, unzip and paste the source code in this folder.
 
-Open a web browser and type in localhost/path/to/folder, you should be able to view the website now.
+Open a web browser and type in localhost/path/to/folder(eg: localhost/folder/), you should be able to view the website now.
