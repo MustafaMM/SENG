@@ -17,6 +17,7 @@ Open a web browser and type in localhost/path/to/folder(eg: localhost/folder/), 
 
 To use MAMP:
 
+Create a folder containing the source code.
 Open MAMP, go to preferences and do the following: 
 1) Go to port, and set the Apache port to 8888.
 2) Go to Web Server, select Apache.
