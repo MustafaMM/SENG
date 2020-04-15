@@ -4,25 +4,28 @@
   <title>
     Reset 
 </title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="style.css">				<!-- link to css for style -->
+	<script src="passw.js"></script>										<!-- link to javascript file -->
 </head>
 <body>
 
   <div class="header">
-  	<h3>Reset password</h3>
   </div>
 	 
   <form method="post" action="resetpass.php">
 	<!-- Define form for submitting -->
 
   	<div class="input-group">
-  		<label>Username</label>
-  		<input type="test" name="username" >
+  		<label>Existing username:</label>
+  		<input type="test" name="username" placeholder="cmonBruh" 
+		onfocus="this.placeholder = ''"
+		onblur="this.placeholder = 'enter your text'" />
   	</div>
   	<div class="input-group">
-  		<button type="submit" class="btn" name="resetPassword">Reset Password</button>
+	<!-- Submit button. -->
+  		<button type="submit" class="btn" name="resetPassword">Reset password</button>
   	</div>
-  	<a href="login.php">Sign in instead</a>	
+  	<a href="login.php">Sign in.</a>	<!-- Login redirect instead.-->
 	<div>
 	<?php
 	session_start();
