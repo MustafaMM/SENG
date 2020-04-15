@@ -1,4 +1,4 @@
-# SENG
+# Final Submission
 SENG_300 Winter 2020
 
 Academic Paper Submission System
