@@ -7,7 +7,7 @@ Academic Paper Submission System
 
 Very helpful to have **XAMPP** (https://www.apachefriends.org/index.html) or **MAMP**(https://www.mamp.info/en/windows/) installed in your device. 
 
-Make sure the get the source code from the latest branch(working_01).
+**_Make sure the get the source code from the latest branch(working_01)._**
 
 To use _XAMPP_:
 
