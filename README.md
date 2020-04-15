@@ -22,5 +22,6 @@ Open MAMP, go to preferences and do the following:
 1) Go to port, and set the Apache port to 8888.
 2) Go to Web Server, select Apache.
 3) Make sure that when you are in Web Server, the Document Root is the same root as the folder containing the source code.
+4) Start the servers from the main page
 
 Open a web browser and type in localhost:8888, you should be able to view the website now.
