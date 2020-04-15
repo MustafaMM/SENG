@@ -5,9 +5,11 @@ Academic Paper Submission System
 
 -- AGILE Scrum methodology used.
 
-Very helpful to have XAMPP (https://www.apachefriends.org/index.html) or MAMP(https://www.mamp.info/en/windows/) installed in your device. 
+Very helpful to have **XAMPP** (https://www.apachefriends.org/index.html) or **MAMP**(https://www.mamp.info/en/windows/) installed in your device. 
 
-To use XAMPP:
+Make sure the get the source code from the latest branch(working_01).
+
+To use _XAMPP_:
 
 Once you have XAMPP, open XAMPP control panel, start the Apache and MySQL servers.
 
@@ -15,7 +17,7 @@ Go to C:\xampp\htdocs, create a folder, unzip and paste the source code in this 
 
 Open a web browser and type in localhost/path/to/folder(eg: localhost/folder/), you should be able to view the website now.
 
-To use MAMP:
+To use _MAMP_:
 
 Create a folder containing the source code.
 Open MAMP, go to preferences and do the following: 
