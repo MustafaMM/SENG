@@ -1,6 +1,5 @@
-# Final Submission
-## SENG-300 Winter 2020
-
+# SENG-300 Winter 2020
+## Final Submission
 ### Academic Paper Submission System
 
 -- AGILE Scrum methodology used.
